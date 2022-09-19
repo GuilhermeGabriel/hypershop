@@ -1,9 +1,15 @@
-import { Box, FormControlLabel, FormGroup, Grid, Input, TextField, Typography } from "@mui/material";
+import { Box, Button, FormControlLabel, FormGroup, Grid, Input, TextField, Typography } from "@mui/material";
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Checkbox from '@mui/material/Checkbox';
+import CreditCardInput from 'react-credit-card-input';
+import { useState } from "react";
 
 function Checkout() {
+  const [cardNumber, setCardNumber] = useState();
+  const [cardExpiry, setCardExpiry] = useState();
+  const [cardCVC, setCardCVC] = useState();
+
   return (
     <Box>
       <Header />
@@ -52,6 +58,34 @@ function Checkout() {
             <FormControlLabel control={<Checkbox />} label="R$ 0,00 / Envio grátis (10 dias úteis)" />
             <FormControlLabel control={<Checkbox />} label="R$ 25,00 / Sedex (5 dias úteis)" />
           </FormGroup>
+          <Box marginTop={2} padding={1} boxShadow={'1px 1px 1px 2px #eee'} borderRadius={1}>
+            <CreditCardInput
+              customTextLabels={{
+                invalidCardNumber: 'Número de cartão inválido',
+                expiryError: {
+                  invalidExpiryDate: 'Datá de expiração é inválida',
+                  monthOutOfRange: 'Meses de expiração devem estar entre 1 e 12',
+                  yearOutOfRange: 'Ano de expiração não pode ser no passado',
+                  dateOutOfRange: 'A data de expiração não pode ser no passado'
+                },
+                invalidCvc: 'Código de segurança inválido',
+                invalidZipCode: 'Código postal inválido',
+                cardNumberPlaceholder: 'Número do cartão',
+                expiryPlaceholder: 'MM/AA',
+                cvcPlaceholder: 'CVC',
+                zipPlaceholder: 'CEP'
+              }}
+              cardNumberInputProps={{ value: cardNumber, onChange: e => setCardNumber() }}
+              cardExpiryInputProps={{ value: cardExpiry, onChange: e => setCardExpiry() }}
+              cardCVCInputProps={{ value: cardCVC, onChange: e => setCardCVC() }}
+              fieldClassName="input"
+            />
+          </Box>
+
+          <Box fullWidth textAlign={'end'}>
+            <Button sx={{ padding: 2, marginTop: 3 }} variant='contained'>Finalizar pedido</Button>
+          </Box>
+
         </Grid>
         <Grid item xs={12} md={6}>
           <div style={{ display: 'flex', backgroundColor: 'red' }}>aaa</div>

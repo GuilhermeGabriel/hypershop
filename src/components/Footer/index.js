@@ -23,7 +23,7 @@ function Footer() {
 
       <Grid item xs={12} sm={6}>
         <span id='footer_right_info'>
-          Feito com ❤️ by Gui :D
+          Feito com ❤️ by&nbsp;<a href='https://www.linkedin.com/in/guilhermegabr/'>Gui</a>&nbsp;:D
           {/* Copyright © 2022 IgluShop */}
         </span>
       </Grid>

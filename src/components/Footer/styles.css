@@ -25,6 +25,7 @@
 #footer_right_info {
   display: flex;
   justify-content: end;
+  align-items: center;
   padding: 20px;
   text-align: center;
 }
