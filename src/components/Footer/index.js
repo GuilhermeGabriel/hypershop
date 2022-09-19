@@ -23,7 +23,8 @@ function Footer() {
 
       <Grid item xs={12} sm={6}>
         <span id='footer_right_info'>
-          Copyright © 2020 IgluShop
+          Feito com ❤️ by Gui :D
+          {/* Copyright © 2022 IgluShop */}
         </span>
       </Grid>
 

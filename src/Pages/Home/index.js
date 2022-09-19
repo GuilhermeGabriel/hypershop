@@ -4,6 +4,7 @@ import Card from '../../components/Card';
 import Footer from '../../components/Footer';
 
 import Grid from '@mui/material/Grid';
+import { Link } from 'react-router-dom';
 
 function Home() {
   return (
@@ -32,9 +33,10 @@ function Home() {
         spacing={2}
         paddingBottom={6}
       >
-
         <Grid item xs={12} sm={6} md={3}>
-          <Card></Card>
+          <Link style={{ textDecoration: 'none' }} to='/produto'>
+            <Card></Card>
+          </Link>
         </Grid>
 
         <Grid item xs={12} sm={6} md={3}>
