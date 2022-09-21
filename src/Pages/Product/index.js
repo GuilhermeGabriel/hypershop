@@ -16,10 +16,29 @@ import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import { Alert } from '@mui/material';
 
-function Home() {
+import { doc, getFirestore, onSnapshot } from "firebase/firestore";
+import { useParams } from 'react-router-dom';
+
+function Product() {
   const [openToast, setOpenToast] = React.useState(false);
   const [tamanho, setTamanho] = React.useState('');
   const [cor, setCor] = React.useState('');
+
+  const { id } = useParams();
+
+  const [data, setData] = React.useState({});
+
+  React.useEffect(() => {
+    const db = getFirestore();
+    async function getProdutos() {
+      onSnapshot(doc(db, "produtos", id), (doc) => {
+        setData(doc.data());
+        // console.log(doc.data());
+      });
+    }
+
+    getProdutos();
+  }, [id]);
 
   const handleCloseToast = (event, reason) => {
     if (reason === 'clickaway') {
@@ -48,7 +67,7 @@ function Home() {
         onClose={handleCloseToast}
       >
         <Alert onClose={handleCloseToast} severity='info' sx={{ width: '100%' }}>
-          Lite racer adapt 3.0 shoes adicionado ao carrinho!
+          {data.name} adicionado ao carrinho!
         </Alert>
       </Snackbar>
 
@@ -68,19 +87,19 @@ function Home() {
       >
         <Grid item xs={12} sm={6}>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <img style={{ flex: 1, paddingRight: 16,backgroundColor: '#f6f6f6', objectFit: 'cover' }} src={tenis}></img>
+            <img style={{ width: 200, flex: 1, paddingRight: 16, objectFit: 'cover' }} src={data.image}></img>
           </div>
         </Grid>
 
         <Grid item xs={12} sm={6}>
           <Typography variant="h4" fontWeight={'bold'} component="div">
-            Tenis nike
+            {data.name}
           </Typography>
           <Typography variant="h6" fontWeight={'bold'} component="div">
-            823,00 R$
+            {data.preco},00 R$
           </Typography>
           <Typography variant="h6" fontWeight={'500'} color='#7a7a7a' fontSize={14} component="div">
-            Code: NJC90842-Blue-X
+            Code: {id}
           </Typography>
 
           <br></br>
@@ -99,7 +118,6 @@ function Home() {
             <ToggleButton size='small' value="medio">Médio</ToggleButton>
             <ToggleButton size='small' value="grande">Grande</ToggleButton>
           </ToggleButtonGroup>
-
 
           <br></br>
           <br></br>
@@ -121,7 +139,11 @@ function Home() {
 
           <br></br>
           <br></br>
-          <TextField sx={{width: 64}} size='small' placeholder='0' color='secondary' variant="outlined"></TextField>
+          <Typography variant="h5" fontWeight={'400'} color='#7a7a7a' fontSize={12} component="div">
+            QUANTIDADE DISPONÍVEL: {data.quantidade}
+          </Typography>
+
+          <TextField sx={{width: 64}} size='small' placeholder='1' color='secondary' variant="outlined"></TextField>
           <br></br>
           <br></br>
           <Button fullWidth 
@@ -141,4 +163,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Product;

@@ -4,21 +4,20 @@
   justify-content: center;
   flex-direction: column;
   height: 75vh;
-  background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url("../../assets/banner.png");
+  background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url("../../assets/banner.jpg");
   background-size: cover;
 }
 
 #banner_container > h1 {
-  color: #3a3a3a;
+  color: #eee;
   margin-bottom: 32px;
 }
 
 #banner_container > h2 {
   color: white;
-  font-size: 28px;
+  font-size: 24px;
   text-align: center;
   margin-bottom: 32px;
   padding-left: 64px;
   padding-right: 64px;
-  /* max-width: 500px; */
 }

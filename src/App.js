@@ -6,12 +6,14 @@ import Product from './Pages/Product';
 import Cart from './Pages/Cart';
 import Checkout from "./Pages/Checkout";
 
+import { connectFirebase } from './services/firebase';
+
 function App() {
   return (
     <> 
       <Routes>
         <Route exact path='/' element={<Home />} />
-        <Route exact path='/produto' element={<Product />} />
+        <Route exact path='/produto/:id' element={<Product />} />
         <Route exact path='/produtos' element={<Products />} />
         <Route exact path='/carrinho' element={<Cart />} />
         <Route exact path='/checkout' element={<Checkout />} />

@@ -6,10 +6,25 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import Divider from '@mui/material/Divider';
 
-export default function MultiActionAreaCard() {
+import { doc, getFirestore, onSnapshot } from "firebase/firestore";
+
+export default function MultiActionAreaCard({ id }) {
+  const [data, setData] = React.useState({});
+
+  React.useEffect(() => {
+    const db = getFirestore();
+    async function getProdutos() {
+      onSnapshot(doc(db, "produtos", id), (doc) => {
+        setData(doc.data());
+        // console.log("Current data: ", doc.data());
+      });
+    }
+
+    getProdutos();
+  }, []);
+
   return (
     <Card
-      // style={{ border: "none", boxShadow: "none", margin: 8 }}
       variant='outlined'>
       
       <CardActionArea>
@@ -17,21 +32,20 @@ export default function MultiActionAreaCard() {
           sx={{ objectFit: "contain", marginTop: 6, marginBottom: 6 }}
           component="img"
           height="140"
-          image={require('../../assets/tenis.png')}
-          alt="green iguana"
+          image={data.image}
         />
          <Divider variant="middle"/>
         <CardContent>
           <Typography gutterBottom variant="h6" component="div">
-            Alphaboost shoes
+            {data.name}
           </Typography>
           
           <Typography sx={{ fontWeight: '700' }} color="text.primary">
-            R$ 109.50
+            R$ {data.preco},00
           </Typography>
 
           <Typography sx={{ fontSize: 12, color: '#737373' }} variant="h6" color="text.primary">
-            Tenis de corrida
+            {data.categoria}
           </Typography>
         </CardContent>
       

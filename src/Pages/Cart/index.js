@@ -7,22 +7,13 @@ import Grid from '@mui/material/Grid';
 import tenis from '../../assets/tenis.png';
 
 import Typography from '@mui/material/Typography';
-
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
 
 import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
 
 import { Link } from 'react-router-dom';
 
 function Cart() {
-
   return (
     <div>
       <Header />
@@ -54,8 +45,6 @@ function Cart() {
           <table style={{ borderCollapse: 'collapse', width: '100%' }}>
             <tr>
               <td style={{ width: '80vw', textAlign: 'start', fontWeight: '400', paddingBottom: 12 }}>PRODUTO</td>
-
-              {/* <Box component="td" display={{xs: 'none', md: 'contents'}} style={{ width: '60vw', textAlign: 'end', fontWeight: '400', paddingBottom: 12 }}>QUANTIDADE</Box> */}
 
               <td style={{ width: '60vw', textAlign: 'end', fontWeight: '400', paddingBottom: 12 }}>PREÇO</td>
               <td style={{ width: '60vw', textAlign: 'end', fontWeight: '400', paddingBottom: 12 }}>TOTAL</td>
