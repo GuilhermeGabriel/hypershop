@@ -28,8 +28,14 @@ function Home() {
 
       <Grid
         container
-        paddingLeft={4}
-        paddingRight={4}
+        paddingLeft={{
+          xs: 2,
+          md: 8
+        }}
+        paddingRight={{
+          xs: 2,
+          md: 8
+        }}
         spacing={2}
         paddingBottom={6}
       >

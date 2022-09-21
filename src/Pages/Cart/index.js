@@ -22,11 +22,6 @@ import StepLabel from '@mui/material/StepLabel';
 import { Link } from 'react-router-dom';
 
 function Cart() {
-  const steps = [
-    'Select master blaster campaign settings',
-    'Create an ad group',
-    'Create an ad',
-  ];
 
   return (
     <div>
@@ -40,17 +35,8 @@ function Cart() {
         <a href=''>Continuar comprando</a>
       </Typography>
 
-      {/* <Box sx={{ width: '100%' }}>
-        <Stepper activeStep={1} alternativeLabel>
-          {steps.map((label) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-      </Box> */}
-
       <Grid
+        marginBottom={'30vh'}
         container
         paddingLeft={{
           xs: 4,
@@ -99,10 +85,6 @@ function Cart() {
               <td style={{ textAlign: 'end', fontSize: 12 }}>
                 <Typography fontSize={{ xs: 12, md: 16 }}>R$1646,00</Typography>
               </td>
-
-              {/* <td style={{textAlign: 'end', fontSize: 14}}>
-                1208,00 R$
-              </td> */}
             </tr>
 
           </table>
@@ -114,10 +96,13 @@ function Cart() {
             <Typography fontSize={15}>Sub total</Typography>
             <Typography fontSize={15}>R$ 1650,00</Typography>
           </div>
-          <Typography sx={{ marginTop: 3 }} fontStyle={'italic'} color={'#737373'} fontSize={15}>Taxa de serviço e entrega calculada no checkout</Typography>
+          <Typography sx={{ marginTop: 3 }} fontStyle={'italic'} color={'#737373'} fontSize={15}>Taxa de serviço e de entrega calculada no checkout.</Typography>
           <Link style={{ textDecoration: 'none' }} to='/checkout'>
-            <Button sx={{ marginTop: 3 }} variant='contained'>Checkout</Button>
+            <Box fullWidth textAlign={'end'}>
+              <Button sx={{ marginRight: -1, marginTop: 2 }} variant='contained'>Checkout</Button>
+            </Box>
           </Link>
+
         </Grid>
       </Grid>
 

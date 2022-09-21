@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter } from 'react-router-dom';
+import ScrollToTop from "./services/ScrollToTop";
+
 
 const innerTheme = createTheme({
   palette: {
@@ -27,6 +29,7 @@ root.render(
   <React.StrictMode>
     <ThemeProvider theme={innerTheme}>
       <BrowserRouter>
+        <ScrollToTop/>
         <App />
       </BrowserRouter>
     </ThemeProvider>

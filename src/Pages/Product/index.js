@@ -13,9 +13,21 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
+import Snackbar from '@mui/material/Snackbar';
+import { Alert } from '@mui/material';
+
 function Home() {
+  const [openToast, setOpenToast] = React.useState(false);
   const [tamanho, setTamanho] = React.useState('');
   const [cor, setCor] = React.useState('');
+
+  const handleCloseToast = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenToast(false);
+  };
 
   const handleChangeTamanho = (event, newTamanho) => {
     setTamanho(newTamanho);
@@ -29,10 +41,27 @@ function Home() {
     <div>
       <Header />
 
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        open={openToast}
+        autoHideDuration={1000}
+        onClose={handleCloseToast}
+      >
+        <Alert onClose={handleCloseToast} severity='info' sx={{ width: '100%' }}>
+          Lite racer adapt 3.0 shoes adicionado ao carrinho!
+        </Alert>
+      </Snackbar>
+
       <Grid
         container
-        paddingLeft={4}
-        paddingRight={4}
+        paddingLeft={{
+          xs: 4,
+          md: 14
+        }}
+        paddingRight={{
+          xs: 4,
+          md: 14
+        }}
         marginTop={0}
         spacing={4}
         paddingBottom={6}
@@ -95,7 +124,9 @@ function Home() {
           <TextField sx={{width: 64}} size='small' placeholder='0' color='secondary' variant="outlined"></TextField>
           <br></br>
           <br></br>
-          <Button fullWidth variant='outlined' color='terciary'>ADICIONAR AO CARRINHO</Button>
+          <Button fullWidth 
+            onClick={()=>setOpenToast(true)}
+          variant='outlined' color='terciary'>ADICIONAR AO CARRINHO</Button>
           <br></br>
           <br></br>
           <Typography variant="h6" fontWeight={'400'} color='#000' fontSize={15} component="div">

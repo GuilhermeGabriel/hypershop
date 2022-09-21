@@ -8,7 +8,7 @@ import Checkout from "./Pages/Checkout";
 
 function App() {
   return (
-    <>
+    <> 
       <Routes>
         <Route exact path='/' element={<Home />} />
         <Route exact path='/produto' element={<Product />} />
