@@ -34,7 +34,7 @@ function Footer() {
 
       <Grid item xs={12} sm={6} padding={2} sx={{display: 'flex', justifyContent: {xs: 'center', sm: 'end'}}}>
         <span id='footer_right_info'>
-          Feito com ❤️ by&nbsp;<a href='https://www.linkedin.com/in/guilhermegabr/'>Gui</a>&nbsp;:D
+          Feito com ❤️ por&nbsp;<a href='https://www.linkedin.com/in/guilhermegabr/'>Gui</a>&nbsp;:D
         </span>
       </Grid>
 
