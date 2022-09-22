@@ -50,6 +50,8 @@ function Cart() {
               <td style={{ width: '60vw', textAlign: 'end', fontWeight: '400', paddingBottom: 12 }}>TOTAL</td>
             </tr>
 
+            
+
             <tr style={{ borderBottom: '1pt solid #e1e3e5', borderTop: '1pt solid #e1e3e5' }}>
               <td style={{ paddingTop: 16, paddingBottom: 8 }}>
                 <div style={{ display: 'flex', alignItems: 'start' }}>

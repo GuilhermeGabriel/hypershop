@@ -10,10 +10,25 @@ import Badge from '@mui/material/Badge';
 import iglooSvg from '../../assets/igloo.svg';
 import { ReactSVG } from 'react-svg'
 
+import { useData } from '../../Providers/UserDataProvider';
+import { useEffect, useState } from 'react';
+
 function Header() {
+  const { data, setData } = useData();
+  const [quantidade, setQuantidade] = useState(0);
+
+  useEffect(() => {
+    let q=0;
+    for(let el in data.produtos){
+      // console.log(data.produtos[el]);
+      q+=data.produtos[el];
+    }
+    setQuantidade(q);
+  },[data]);
+
   return (
     <Box>
-      <AppBar color='secondary' position="static" variant='outlined'>
+      <AppBar color='secondary' position="static" elevation={0} variant='outlined'>
         <Toolbar >
           <Link style={{ textDecoration: 'none' }} to='/'>
             <ReactSVG src={iglooSvg} />
@@ -33,7 +48,7 @@ function Header() {
               aria-label="bag"
               sx={{ mr: 2 }}
             >
-              <Badge badgeContent={1} color="primary">
+              <Badge badgeContent={quantidade} color="primary">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>

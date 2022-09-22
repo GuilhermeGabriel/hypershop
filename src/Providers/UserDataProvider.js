@@ -3,29 +3,26 @@ import React, { useEffect, useState } from 'react';
 export const UserDataContext = React.createContext({});
 
 export const UserDataProvider = (props) => {
-  const [user, setUser] = useState({
-    uid: '',
-    name: '',
-    email: '',
-    type: '',
-    photoUrl: '',
-    role: ''
+  const [data, setData] = useState({
+    produtos: {},
   });
 
   useEffect(()=>{
-    const userStorage = localStorage.getItem('user');
+    const userStorage = localStorage.getItem('data');
     if(userStorage){
-      setUser(JSON.parse(userStorage));
+      setData(JSON.parse(userStorage));
     } else {
-      setUser({});
+      setData({
+        produtos: {},
+      });
     }
   },[]);
 
   return (
-    <UserDataContext.Provider value={{user,setUser}}>
+    <UserDataContext.Provider value={{data, setData}}>
       {props.children}
     </UserDataContext.Provider>
   );
 };
 
-export const useAuth = () => React.useContext(UserDataContext); 
+export const useData = () => React.useContext(UserDataContext); 
