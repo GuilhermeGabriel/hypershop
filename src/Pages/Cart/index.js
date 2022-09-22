@@ -1,10 +1,8 @@
 import * as React from 'react';
 import Header from '../../components/Header';
-import Card from '../../components/Card';
 import Footer from '../../components/Footer';
 
 import Grid from '@mui/material/Grid';
-import tenis from '../../assets/tenis.png';
 
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -13,7 +11,40 @@ import Box from '@mui/material/Box';
 
 import { Link } from 'react-router-dom';
 
+import { useData } from '../../Providers/UserDataProvider';
+import { doc, getDoc, getFirestore, onSnapshot } from "firebase/firestore";
+
 function Cart() {
+  const { data, setData } = useData();
+  const [produtos, setProdutos] = React.useState([]);
+  const [precoTotal, setPrecoTotal] = React.useState(0);
+
+  React.useEffect(() => {
+    const db = getFirestore();
+
+    let keys = Object.keys(data.produtos);
+    let results = [];
+    for (let k of keys) {
+      const id = k;
+      const r = getDoc(doc(db, "produtos", id));
+      results.push(r);
+    }
+
+    async function getProds() {
+      const resultfinal = await Promise.all(results);
+      const prods = [];
+      let total=0;
+      resultfinal.forEach((doc) => {
+        prods.push(doc.data());
+        total += doc.data().preco*data.produtos[doc.data().id];
+      });
+      setProdutos([...produtos, ...prods]); 
+      setPrecoTotal(total);
+    }
+
+    getProds();
+  }, [data]);
+
   return (
     <div>
       <Header />
@@ -50,34 +81,37 @@ function Cart() {
               <td style={{ width: '60vw', textAlign: 'end', fontWeight: '400', paddingBottom: 12 }}>TOTAL</td>
             </tr>
 
-            
+            {
+              produtos.map(item =>
+                <>
+                  <tr style={{ borderBottom: '1pt solid #e1e3e5', borderTop: '1pt solid #e1e3e5' }}>
+                    <td style={{ paddingTop: 16, paddingBottom: 8 }}>
+                      <div style={{ display: 'flex', alignItems: 'start' }}>
+                        <Box
+                          component="img"
+                          width={{ xs: 64, md: 120 }}
+                          src={item.image}
+                        />
+                        <ul style={{ listStyle: 'none', textAlign: 'start', marginLeft: -24 }}>
+                          <li><b>{item.name}</b></li>
+                          <li>Size: X</li>
+                          <li>Color: Blue</li>
+                          <li><a href=''>remove</a></li>
+                        </ul>
+                      </div>
+                    </td>
 
-            <tr style={{ borderBottom: '1pt solid #e1e3e5', borderTop: '1pt solid #e1e3e5' }}>
-              <td style={{ paddingTop: 16, paddingBottom: 8 }}>
-                <div style={{ display: 'flex', alignItems: 'start' }}>
-                  <Box
-                    component="img"
-                    width={{ xs: 64, md: 120 }}
-                    src={tenis}
-                  />
-                  <ul style={{ listStyle: 'none', textAlign: 'start', marginLeft: -24 }}>
-                    <li><b>Lite racer adapt 3.0 shoes</b></li>
-                    <li>Size: X</li>
-                    <li>Color: Blue</li>
-                    <li><a href=''>remove</a></li>
-                  </ul>
-                </div>
-              </td>
+                    <td style={{ textAlign: 'end', fontSize: 12 }}>
+                      <Typography fontSize={{ xs: 12, md: 16 }}><b>{data.produtos[item.id]}x</b> R${item.preco},00</Typography>
+                    </td>
 
-              <td style={{ textAlign: 'end', fontSize: 12 }}>
-                <Typography fontSize={{ xs: 12, md: 16 }}><b>2x</b> R$823,00</Typography>
-              </td>
-
-              <td style={{ textAlign: 'end', fontSize: 12 }}>
-                <Typography fontSize={{ xs: 12, md: 16 }}>R$1646,00</Typography>
-              </td>
-            </tr>
-
+                    <td style={{ textAlign: 'end', fontSize: 12 }}>
+                      <Typography fontSize={{ xs: 12, md: 16 }}>R${item.preco*data.produtos[item.id]},00</Typography>
+                    </td>
+                  </tr>
+                </>
+              )
+            }
           </table>
         </Grid>
 
@@ -85,11 +119,11 @@ function Cart() {
           <Typography marginTop={-1} fontWeight={'bold'} fontSize={24}>Resumo do pedido</Typography>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 16 }}>
             <Typography fontSize={15}>Sub total</Typography>
-            <Typography fontSize={15}>R$ 1650,00</Typography>
+            <Typography fontSize={15}>R$ {precoTotal},00</Typography>
           </div>
           <Typography sx={{ marginTop: 3 }} fontStyle={'italic'} color={'#737373'} fontSize={15}>Taxa de serviço e de entrega calculada no checkout.</Typography>
           <Link style={{ textDecoration: 'none' }} to='/checkout'>
-            <Box fullWidth textAlign={'end'}>
+            <Box textAlign={'end'}>
               <Button sx={{ marginRight: -1, marginTop: 2 }} variant='contained'>Checkout</Button>
             </Box>
           </Link>

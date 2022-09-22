@@ -7,14 +7,10 @@ export const UserDataProvider = (props) => {
     produtos: {},
   });
 
-  useEffect(()=>{
+  useEffect(() => {
     const userStorage = localStorage.getItem('data');
     if(userStorage){
       setData(JSON.parse(userStorage));
-    } else {
-      setData({
-        produtos: {},
-      });
     }
   },[]);
 

@@ -60,18 +60,20 @@ function Product() {
     setCor(newCor);
   };
 
+  React.useEffect(()=>{
+    localStorage.setItem('data',JSON.stringify(data));
+  },[data]);
+
   const showToastInfo = () => {
     if (item.quantidade < quantidade) {
       setAlertType('error');
       setAlertInfo('Não há itens suficientes!');
     } else {
-      let newQuantidade = data.produtos[id];
-      newQuantidade+=quantidade;
+      let newQuantidade = (data.produtos[id]) ? (data.produtos[id] + quantidade) : quantidade ;
+          
       setData({
         produtos: {...data.produtos, [id]: newQuantidade},
       });
-
-      localStorage.setItem('data',JSON.stringify(data));
 
       setAlertType('success');
       setAlertInfo(quantidade + ' ' + item.name + ' adicionado ao carrinho!');
@@ -173,7 +175,7 @@ function Product() {
               setQuantidade(value);
             }}
             type="number"
-            InputProps={{ inputProps: { min: 1, max: 10 } }}
+            InputProps={{ inputProps: { min: 1, max: 100 } }}
             sx={{ width: 64 }} size='small' placeholder='1' variant="outlined"></TextField>
           <br></br>
           <br></br>

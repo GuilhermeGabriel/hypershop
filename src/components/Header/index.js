@@ -20,7 +20,6 @@ function Header() {
   useEffect(() => {
     let q=0;
     for(let el in data.produtos){
-      // console.log(data.produtos[el]);
       q+=data.produtos[el];
     }
     setQuantidade(q);
