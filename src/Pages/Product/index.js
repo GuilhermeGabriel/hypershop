@@ -122,7 +122,7 @@ function Product() {
             {item.name}
           </Typography>
           <Typography variant="h6" fontWeight={'bold'} component="div">
-            {item.preco},00 R$
+            R$ {item.preco},00
           </Typography>
           <Typography variant="h6" fontWeight={'500'} color='#7a7a7a' fontSize={14} component="div">
             Code: {id}

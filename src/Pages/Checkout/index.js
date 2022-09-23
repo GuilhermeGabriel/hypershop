@@ -91,8 +91,8 @@ function Checkout() {
                         />
                         <ul style={{ listStyle: 'none', textAlign: 'start', marginLeft: -24 }}>
                           <li><b>{item.name}</b></li>
-                          <li>Size: X</li>
-                          <li>Color: Blue</li>
+                          <li>Tamanho: X</li>
+                          <li>Cor: Blue</li>
                           <li><a href=''>remove</a></li>
                         </ul>
                       </div>

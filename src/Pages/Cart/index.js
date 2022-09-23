@@ -45,6 +45,13 @@ function Cart() {
     getProds();
   }, [data]);
 
+  const removeProduct = (e, idproduto) => {
+    let state = data;
+    delete state.produtos[idproduto];
+    localStorage.setItem('data',JSON.stringify(state));  
+    setData(state);
+  }
+
   return (
     <div>
       <Header />
@@ -54,7 +61,7 @@ function Cart() {
       </Typography>
 
       <Typography variant="h6" paddingBottom={2} textAlign='center' fontWeight={'300'} fontSize={16} component="div">
-        <a href=''>Continuar comprando</a>
+        <Link to='/produtos'>Continuar comprando</Link>
       </Typography>
 
       <Grid
@@ -96,7 +103,7 @@ function Cart() {
                           <li><b>{item.name}</b></li>
                           <li>Size: X</li>
                           <li>Color: Blue</li>
-                          <li><a href=''>remove</a></li>
+                          <li><a href='' onClick={(e)=>removeProduct(e, item.id)}>remove</a></li>
                         </ul>
                       </div>
                     </td>
