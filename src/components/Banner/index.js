@@ -1,6 +1,8 @@
+// UI
 import './styles.css';
-
 import Button from '@mui/material/Button';
+
+// Firebase, Routes
 import { Link } from 'react-router-dom';
 
 function Banner() {

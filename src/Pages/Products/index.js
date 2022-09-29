@@ -1,9 +1,11 @@
+// UI
 import Header from '../../components/Header';
 import Card from '../../components/Card';
 import Footer from '../../components/Footer';
-
 import Grid from '@mui/material/Grid';
 import { useEffect, useState } from 'react';
+
+// Firebase, Routes.
 import { collection, doc, getFirestore, onSnapshot, query } from 'firebase/firestore';
 import { Link } from 'react-router-dom';
 

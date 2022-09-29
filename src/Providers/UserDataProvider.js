@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-
 export const UserDataContext = React.createContext({});
 
 export const UserDataProvider = (props) => {

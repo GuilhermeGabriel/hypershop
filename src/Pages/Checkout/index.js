@@ -1,11 +1,12 @@
+// UI
 import React from "react";
-import { Box, Button, FormControlLabel, FormGroup, Grid, Input, TextField, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-
-import tenis from '../../assets/tenis.png';
 import CheckoutSucess from '../../components/CheckoutSucess';
 import InputCheckout from '../../components/InputCheckout';
+
+// Firebase, Routes.
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { useData } from '../../Providers/UserDataProvider';
 

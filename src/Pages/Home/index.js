@@ -1,9 +1,11 @@
+// UI
 import Header from '../../components/Header';
 import Banner from '../../components/Banner';
 import Card from '../../components/Card';
 import Footer from '../../components/Footer';
-
 import Grid from '@mui/material/Grid';
+
+// Firebase, Routes.
 import { Link } from 'react-router-dom';
 
 function Home() {

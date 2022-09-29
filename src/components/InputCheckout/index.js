@@ -1,9 +1,10 @@
+// UI
 import { Box, Button, FormControlLabel, FormGroup, Grid, Input, TextField, Typography } from "@mui/material";
 import Checkbox from '@mui/material/Checkbox';
 import CreditCardInput from 'react-credit-card-input';
 import { useState } from "react";
 
-export default function InputCheckout({onFinish}) {
+export default function InputCheckout({ onFinish }) {
   const [cardNumber, setCardNumber] = useState();
   const [cardExpiry, setCardExpiry] = useState();
   const [cardCVC, setCardCVC] = useState();
@@ -64,7 +65,7 @@ export default function InputCheckout({onFinish}) {
       </Box>
 
       <Box fullWidth textAlign={'end'}>
-        <Button onClick={()=>onFinish(true)} sx={{ padding: 2, marginTop: 3 }} variant='contained'>Finalizar pedido</Button>
+        <Button onClick={() => onFinish(true)} sx={{ padding: 2, marginTop: 3 }} variant='contained'>Finalizar pedido</Button>
       </Box>
     </>
   );

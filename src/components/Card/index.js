@@ -1,3 +1,4 @@
+// UI
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -6,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import Divider from '@mui/material/Divider';
 
+// Firebase, Routes
 import { doc, getFirestore, onSnapshot } from "firebase/firestore";
 
 export default function MultiActionAreaCard({ id }) {
@@ -16,7 +18,6 @@ export default function MultiActionAreaCard({ id }) {
     async function getProdutos() {
       onSnapshot(doc(db, "produtos", id), (doc) => {
         setData(doc.data());
-        // console.log("Current data: ", doc.data());
       });
     }
 

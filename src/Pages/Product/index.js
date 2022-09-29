@@ -1,21 +1,17 @@
+// UI
 import * as React from 'react';
 import Header from '../../components/Header';
-import Card from '../../components/Card';
 import Footer from '../../components/Footer';
-
 import Grid from '@mui/material/Grid';
-import tenis from '../../assets/tenis.png';
-
 import Typography from '@mui/material/Typography';
-
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-
 import Snackbar from '@mui/material/Snackbar';
 import { Alert } from '@mui/material';
 
+// Firebase, Routes.
 import { doc, getFirestore, onSnapshot } from "firebase/firestore";
 import { useParams } from 'react-router-dom';
 import { useData } from '../../Providers/UserDataProvider';

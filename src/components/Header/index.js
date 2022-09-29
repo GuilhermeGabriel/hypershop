@@ -1,3 +1,4 @@
+// UI
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -6,10 +7,8 @@ import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from 'react-router-dom';
 import Badge from '@mui/material/Badge';
-
 import iglooSvg from '../../assets/igloo.svg';
 import { ReactSVG } from 'react-svg'
-
 import { useData } from '../../Providers/UserDataProvider';
 import { useEffect, useState } from 'react';
 

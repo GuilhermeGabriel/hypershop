@@ -1,5 +1,5 @@
+// UI
 import './styles.css';
-
 import MastercardSvg from '../../assets/mastercard-svgrepo-com.svg';
 import PayPalSvg from '../../assets/paypal-svgrepo-com.svg';
 import VisaSvg from '../../assets/visa-svgrepo-com.svg';

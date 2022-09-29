@@ -18,10 +18,6 @@ function App() {
         <Route exact path='/carrinho' element={<Cart />} />
         <Route exact path='/checkout' element={<Checkout />} />
       </Routes>
-      {/* <Cart/> */}
-      {/* <Product/> */}
-      {/* <Home /> */}
-      {/* <Products/> */}
     </>
   );
 }

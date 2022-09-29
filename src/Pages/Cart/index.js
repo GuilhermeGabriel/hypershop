@@ -1,16 +1,14 @@
+// UI
 import * as React from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-
 import Grid from '@mui/material/Grid';
-
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-
 import Box from '@mui/material/Box';
 
+// Firebase, Routes
 import { Link } from 'react-router-dom';
-
 import { useData } from '../../Providers/UserDataProvider';
 import { doc, getDoc, getFirestore, onSnapshot } from "firebase/firestore";
 

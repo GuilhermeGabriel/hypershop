@@ -1,7 +1,5 @@
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
+// UI
 import { Grid, Typography } from '@mui/material';
-
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 function CheckoutSucess() {
