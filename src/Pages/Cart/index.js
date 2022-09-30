@@ -40,7 +40,7 @@ function Cart() {
         prods.push(doc.data());
         total += doc.data().preco * data.produtos[doc.data().id];
       });
-      setProdutos([...produtos, ...prods]);
+      setProdutos([...prods]);
       setPrecoTotal(total);
     }
 
@@ -84,7 +84,7 @@ function Cart() {
         <Alert severity='error' sx={{ width: '100%' }}>
           Quantidade de itens indisponíveis!
         </Alert>
-      </Snackbar>
+      </Snackbar> 
 
       <Typography marginTop={2} paddingTop={2} textAlign='center' fontWeight={'bold'} fontSize={30} component="div">
         Carrinho de compras

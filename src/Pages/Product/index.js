@@ -68,6 +68,7 @@ function Product() {
       let newQuantidade = (data.produtos[id]) ? (data.produtos[id] + quantidade) : quantidade ;
           
       setData({
+        ...data,
         produtos: {...data.produtos, [id]: newQuantidade},
       });
 

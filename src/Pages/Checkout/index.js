@@ -9,6 +9,7 @@ import InputCheckout from '../../components/InputCheckout';
 // Firebase, Routes.
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { useData } from '../../Providers/UserDataProvider';
+import { useState } from "react";
 
 function Checkout() {
   const { data, setData } = useData();
@@ -35,12 +36,16 @@ function Checkout() {
         prods.push(doc.data());
         total += doc.data().preco * data.produtos[doc.data().id];
       });
-      setProdutos([...produtos, ...prods]);
+      setProdutos([...prods]);
       setPrecoTotal(total);
     }
 
     getProds();
   }, [data]);
+
+  useState(() => {
+    console.log(data);
+  }, [data])
 
   return (
     <Box>
@@ -59,7 +64,6 @@ function Checkout() {
         spacing={3}
         paddingBottom={6}
       >
-
         {
 
           (!finalizado) ?
@@ -90,11 +94,10 @@ function Checkout() {
                           width={{ xs: 64, md: 120 }}
                           src={item.image}
                         />
-                        <ul style={{ listStyle: 'none', textAlign: 'start', marginLeft: -24 }}>
+                        <ul style={{ marginTop: 32, listStyle: 'none', textAlign: 'start', marginLeft: -24 }}>
                           <li><b>{item.name}</b></li>
                           <li>Tamanho: X</li>
                           <li>Cor: Blue</li>
-                          <li><a href=''>remove</a></li>
                         </ul>
                       </div>
                     </td>
@@ -114,12 +117,12 @@ function Checkout() {
             <tr>
               <td style={{ width: '80vw', textAlign: 'start', fontWeight: '400', paddingTop: 20 }}>Taxa de entrega:</td>
               <td style={{ width: '60vw', textAlign: 'end', fontWeight: '400', paddingBottom: 12 }}></td>
-              <td style={{ width: '60vw', textAlign: 'end', fontWeight: '400', paddingTop: 12 }}>R$25,00</td>
+              <td style={{ width: '60vw', textAlign: 'end', fontWeight: '400', paddingTop: 12 }}>R${data.envio},00</td>
             </tr>
             <tr>
               <td style={{ width: '80vw', textAlign: 'start', fontWeight: '400', paddingTop: 10 }}>Total:</td>
               <td style={{ width: '60vw', textAlign: 'end', fontWeight: '400', paddingBottom: 12 }}></td>
-              <td style={{ width: '60vw', textAlign: 'end', fontWeight: 'bold', fontSize: 20, paddingTop: 8 }}>R$ {precoTotal},00</td>
+              <td style={{ width: '60vw', textAlign: 'end', fontWeight: 'bold', fontSize: 20, paddingTop: 8 }}>R$ {precoTotal + data.envio},00</td>
             </tr>
           </table>
         </Grid>
