@@ -1,5 +1,5 @@
 // UI
-import * as React from 'react';
+import { useEffect, useState } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -11,18 +11,18 @@ import Divider from '@mui/material/Divider';
 import { doc, getFirestore, onSnapshot } from "firebase/firestore";
 
 export default function MultiActionAreaCard({ id }) {
-  const [data, setData] = React.useState({});
+  const [data, setData] = useState({});
 
-  React.useEffect(() => {
+  useEffect(() => {
     const db = getFirestore();
-    async function getProdutos() {
+    function getProdutos() {
       onSnapshot(doc(db, "produtos", id), (doc) => {
         setData(doc.data());
       });
     }
 
     getProdutos();
-  }, []);
+  });
 
   return (
     <>
@@ -63,7 +63,6 @@ export default function MultiActionAreaCard({ id }) {
             </CardActionArea>
           </Card>
       }
-
     </>
   );
 }

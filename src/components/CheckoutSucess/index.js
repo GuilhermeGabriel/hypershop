@@ -1,10 +1,10 @@
 // UI
-import { Grid, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { useData } from '../../Providers/UserDataProvider';
 
 function CheckoutSucess() {
-  const { data, setData } = useData();
+  const { data } = useData();
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>

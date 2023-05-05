@@ -6,7 +6,7 @@ import Grid from '@mui/material/Grid';
 import { useEffect, useState } from 'react';
 
 // Firebase, Routes.
-import { collection, doc, getFirestore, onSnapshot, query } from 'firebase/firestore';
+import { collection, getFirestore, onSnapshot, query } from 'firebase/firestore';
 import { Link } from 'react-router-dom';
 
 function Products() {
@@ -25,7 +25,7 @@ function Products() {
     }
 
     getProdutosData();
-  }, []);
+  });
 
   return (
     <div>

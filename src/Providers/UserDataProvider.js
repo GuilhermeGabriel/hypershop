@@ -21,8 +21,8 @@ export const UserDataProvider = (props) => {
     const userStorage = localStorage.getItem('data');
     if (userStorage) {
       setData(JSON.parse(userStorage));
-    }else{
-      localStorage.setItem('data',JSON.stringify(data));
+    } else {
+      localStorage.setItem('data', JSON.stringify(data));
     }
   }, []);
 

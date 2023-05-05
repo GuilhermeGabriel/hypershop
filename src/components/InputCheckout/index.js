@@ -1,10 +1,9 @@
 // UI
-import { Box, Button, FormControlLabel, FormGroup, Grid, Input, TextField, Typography } from "@mui/material";
+import { Box, Button, FormControlLabel, FormGroup, Grid, TextField, Typography } from "@mui/material";
 import Checkbox from '@mui/material/Checkbox';
 import CreditCardInput from 'react-credit-card-input';
 import { useState } from "react";
 import { useData } from "../../Providers/UserDataProvider";
-import { FormControl } from '@mui/material';
 
 export default function InputCheckout({ onFinish }) {
   const { data, setData } = useData();
@@ -49,28 +48,28 @@ export default function InputCheckout({ onFinish }) {
   const onClickFinish = () => {
     let erros = {};
 
-    if (data.email == '') erros.emailError = true;
+    if (data.email === '') erros.emailError = true;
     else erros.emailError = false;
 
-    if (data.name == '') erros.nameError = true;
+    if (data.name === '') erros.nameError = true;
     else erros.nameError = false;
 
-    if (data.telefone == '') erros.telefoneError = true;
+    if (data.telefone === '') erros.telefoneError = true;
     else erros.telefoneError = false;
 
-    if (data.endereco == '') erros.enderecoError = true;
+    if (data.endereco === '') erros.enderecoError = true;
     else erros.enderecoError = false;
 
-    if (data.cidade == '') erros.cidadeError = true;
+    if (data.cidade === '') erros.cidadeError = true;
     else erros.cidadeError = false;
 
-    if (data.pais == '') erros.paisError = true;
+    if (data.pais === '') erros.paisError = true;
     else erros.paisError = false;
 
-    if (data.estado == '') erros.estadoError = true;
+    if (data.estado === '') erros.estadoError = true;
     else erros.estadoError = false;
 
-    if (data.cep == '') erros.cepError = true;
+    if (data.cep === '') erros.cepError = true;
     else erros.cepError = false;
 
     setInputsError(erros);

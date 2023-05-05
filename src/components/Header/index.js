@@ -13,7 +13,7 @@ import { useData } from '../../Providers/UserDataProvider';
 import { useEffect, useState } from 'react';
 
 function Header() {
-  const { data, setData } = useData();
+  const { data } = useData();
   const [quantidade, setQuantidade] = useState(0);
 
   useEffect(() => {
