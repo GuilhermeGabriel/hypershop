@@ -11,7 +11,7 @@ import InfoIcon from '@mui/icons-material/Info';
 // Firebase, Routes
 import { Link, useNavigate } from 'react-router-dom';
 import { useData } from '../../Providers/UserDataProvider';
-import { doc, getDoc, getFirestore, onSnapshot } from "firebase/firestore";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { Alert, Snackbar } from '@mui/material';
 import { useState } from 'react';
 
@@ -48,10 +48,9 @@ function Cart() {
   }, [data]);
 
   const removeProduct = (e, idproduto) => {
-    let state = data;
-    delete state.produtos[idproduto];
-    localStorage.setItem('data', JSON.stringify(state));
-    setData(state);
+    delete data.produtos[idproduto];
+    localStorage.setItem('data', JSON.stringify(data));
+    setData({...data, data});
   }
 
   let navigate = useNavigate();
@@ -84,7 +83,7 @@ function Cart() {
         <Alert severity='error' sx={{ width: '100%' }}>
           Quantidade de itens indisponíveis!
         </Alert>
-      </Snackbar> 
+      </Snackbar>
 
       <Typography marginTop={2} paddingTop={2} textAlign='center' fontWeight={'bold'} fontSize={30} component="div">
         Carrinho de compras
@@ -114,16 +113,18 @@ function Cart() {
               >
                 <Grid item xs={12} md={9}>
                   <table style={{ borderCollapse: 'collapse', width: '100%' }}>
-                    <tr>
-                      <td style={{ width: '80vw', textAlign: 'start', fontWeight: '400', paddingBottom: 12 }}>PRODUTO</td>
+                    <thead>
+                      <tr>
+                        <td style={{ width: '80vw', textAlign: 'start', fontWeight: '400', paddingBottom: 12 }}>PRODUTO</td>
 
-                      <td style={{ width: '60vw', textAlign: 'end', fontWeight: '400', paddingBottom: 12 }}>PREÇO</td>
-                      <td style={{ width: '60vw', textAlign: 'end', fontWeight: '400', paddingBottom: 12 }}>TOTAL</td>
-                    </tr>
+                        <td style={{ width: '60vw', textAlign: 'end', fontWeight: '400', paddingBottom: 12 }}>PREÇO</td>
+                        <td style={{ width: '60vw', textAlign: 'end', fontWeight: '400', paddingBottom: 12 }}>TOTAL</td>
+                      </tr>
+                    </thead>
 
                     {
                       produtos.map(item =>
-                        <>
+                        <tbody key={item.id}>
                           <tr style={{ borderBottom: '1pt solid #e1e3e5', borderTop: '1pt solid #e1e3e5' }}>
                             <td style={{ paddingTop: 16, paddingBottom: 8 }}>
                               <div style={{ display: 'flex', alignItems: 'start' }}>
@@ -136,7 +137,7 @@ function Cart() {
                                   <li><b>{item.name}</b></li>
                                   <li>Size: X</li>
                                   <li>Color: Blue</li>
-                                  <li><a href='' onClick={(e) => removeProduct(e, item.id)}>remover</a></li>
+                                  <li><a href="#" onClick={(e) => removeProduct(e, item.id)}>remover</a></li>
                                 </ul>
                               </div>
                             </td>
@@ -155,7 +156,7 @@ function Cart() {
                               <Typography fontSize={{ xs: 12, md: 16 }}>R${item.preco * data.produtos[item.id]},00</Typography>
                             </td>
                           </tr>
-                        </>
+                        </tbody>
                       )
                     }
                   </table>

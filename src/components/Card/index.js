@@ -26,7 +26,7 @@ export default function MultiActionAreaCard({ id }) {
 
   return (
     <>
-      {
+      {/* {
         (Object.keys(data).length === 0) ?
           <>
             <Skeleton animation='wave' variant="rect" height={240} />
@@ -34,7 +34,7 @@ export default function MultiActionAreaCard({ id }) {
             <Skeleton animation="wave" variant="text" sx={{ fontSize: '1rem' }} />
             <Skeleton animation="wave" variant="text" sx={{ fontSize: '1rem' }} />
           </>
-          :
+          : */}
           <Card variant='outlined'>
 
             <CardActionArea>
@@ -62,7 +62,7 @@ export default function MultiActionAreaCard({ id }) {
 
             </CardActionArea>
           </Card>
-      }
+      {/* } */}
     </>
   );
 }

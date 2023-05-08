@@ -110,7 +110,7 @@ function Product() {
       >
         <Grid item xs={12} sm={6}>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <img style={{ width: 200, flex: 1, paddingRight: 16, objectFit: 'cover' }} src={item.image}></img>
+            <img alt='imagem do produto' style={{ maxWidth: '30vw', flex: 1, paddingRight: 16, objectFit: 'cover' }} src={item.image}></img>
           </div>
         </Grid>
 

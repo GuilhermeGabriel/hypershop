@@ -6,6 +6,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter } from 'react-router-dom';
 import ScrollToTop from "./services/ScrollToTop";
 import { UserDataProvider } from './Providers/UserDataProvider';
+import './services/firebase';
 
 const innerTheme = createTheme({
   palette: {

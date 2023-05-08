@@ -17,12 +17,12 @@ function Header() {
   const [quantidade, setQuantidade] = useState(0);
 
   useEffect(() => {
-    let q=0;
-    for(let el in data.produtos){
-      q+=data.produtos[el];
+    let q = 0;
+    for (let el in data.produtos) {
+      q += data.produtos[el];
     }
     setQuantidade(q);
-  },[data]);
+  }, [data]);
 
   return (
     <Box>

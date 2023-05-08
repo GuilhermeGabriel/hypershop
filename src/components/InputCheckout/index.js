@@ -75,6 +75,8 @@ export default function InputCheckout({ onFinish }) {
     setInputsError(erros);
     if (erros.emailError || erros.cepError || erros.cidadeError || erros.enderecoError || erros.nameError
       || erros.telefoneError || erros.estadoError || erros.paisError) {
+
+        
       return;
     }
     onFinish(true);

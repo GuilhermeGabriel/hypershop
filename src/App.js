@@ -6,8 +6,6 @@ import Product from './Pages/Product';
 import Cart from './Pages/Cart';
 import Checkout from "./Pages/Checkout";
 
-import { connectFirebase } from './services/firebase';
-
 function App() {
   return (
     <> 

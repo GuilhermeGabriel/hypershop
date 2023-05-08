@@ -12,7 +12,7 @@ import { useData } from '../../Providers/UserDataProvider';
 import { useState } from "react";
 
 function Checkout() {
-  const { data, setData } = useData();
+  const { data } = useData();
   const [produtos, setProdutos] = React.useState([]);
   const [precoTotal, setPrecoTotal] = React.useState(0);
   const [finalizado, setFinalizado] = React.useState(false);
