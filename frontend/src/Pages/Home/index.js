@@ -67,7 +67,7 @@ function Home() {
 
       </Grid>
 
-      <Footer></Footer>
+      <Footer absolut></Footer>
     </div>
   );
 }

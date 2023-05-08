@@ -128,6 +128,7 @@ function Checkout() {
         </Grid>
 
       </Grid>
+
       <Footer />
     </Box>
   );

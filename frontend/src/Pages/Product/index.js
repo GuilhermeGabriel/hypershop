@@ -56,20 +56,20 @@ function Product() {
     setCor(newCor);
   };
 
-  React.useEffect(()=>{
-    localStorage.setItem('data',JSON.stringify(data));
-  },[data]);
+  React.useEffect(() => {
+    localStorage.setItem('data', JSON.stringify(data));
+  }, [data]);
 
   const showToastInfo = () => {
     if (item.quantidade < quantidade) {
       setAlertType('error');
       setAlertInfo('Não há itens suficientes!');
     } else {
-      let newQuantidade = (data.produtos[id]) ? (data.produtos[id] + quantidade) : quantidade ;
-          
+      let newQuantidade = (data.produtos[id]) ? (data.produtos[id] + quantidade) : quantidade;
+
       setData({
         ...data,
-        produtos: {...data.produtos, [id]: newQuantidade},
+        produtos: { ...data.produtos, [id]: newQuantidade },
       });
 
       setAlertType('success');
@@ -83,7 +83,7 @@ function Product() {
       <Header />
 
       <Snackbar
-      sx={{marginRight: 8}}
+        sx={{ marginRight: 8 }}
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         open={openToast}
         autoHideDuration={5000}
@@ -187,7 +187,7 @@ function Product() {
           </Typography>
         </Grid>
       </Grid>
-
+      
       <Footer></Footer>
     </div>
   );

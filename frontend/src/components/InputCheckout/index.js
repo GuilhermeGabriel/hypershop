@@ -138,8 +138,9 @@ export default function InputCheckout({ onFinish }) {
       </Box>
 
       <Box textAlign={'end'}>
-        <Button onClick={() => onClickFinish()} sx={{ padding: 2, marginTop: 3 }} variant='contained'>Finalizar pedido</Button>
+        <Button onClick={() => onClickFinish()} sx={{ padding: 2, marginTop: 3, marginBottom: 3 }} variant='contained'>Finalizar pedido</Button>
       </Box>
+      
     </>
   );
 }

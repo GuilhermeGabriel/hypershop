@@ -137,7 +137,10 @@ function Cart() {
                                   <li><b>{item.name}</b></li>
                                   <li>Size: X</li>
                                   <li>Color: Blue</li>
-                                  <li><a href="#" onClick={(e) => removeProduct(e, item.id)}>remover</a></li>
+                                  <li>
+                                    <Link to='/carrinho' onClick={(e) => removeProduct(e, item.id)}>remover</Link>
+                                    {/* <a href="#" onClick={(e) => removeProduct(e, item.id)}>remover</a></li> */}
+                                  </li>
                                 </ul>
                               </div>
                             </td>
@@ -186,8 +189,8 @@ function Cart() {
             </Box>
           </>
       }
-
-      <Footer></Footer>
+      
+      <Footer/>
     </div>
   );
 }
