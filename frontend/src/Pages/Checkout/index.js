@@ -1,15 +1,13 @@
 // UI
-import React from "react";
 import { Box, Grid, Typography } from "@mui/material";
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
+import React from "react";
 import CheckoutSucess from '../../components/CheckoutSucess';
 import InputCheckout from '../../components/InputCheckout';
 
 // Firebase, Routes.
 import { doc, getDoc, getFirestore } from "firebase/firestore";
-import { useData } from '../../Providers/UserDataProvider';
 import { useState } from "react";
+import { useData } from '../../Providers/UserDataProvider';
 
 function Checkout() {
   const { data } = useData();
@@ -49,7 +47,6 @@ function Checkout() {
 
   return (
     <Box>
-      <Header />
       <Grid
         container
         paddingLeft={{
@@ -129,7 +126,6 @@ function Checkout() {
 
       </Grid>
 
-      <Footer />
     </Box>
   );
 }

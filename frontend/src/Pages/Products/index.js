@@ -1,9 +1,7 @@
 // UI
-import Header from '../../components/Header';
-import Card from '../../components/Card';
-import Footer from '../../components/Footer';
 import Grid from '@mui/material/Grid';
 import { useEffect, useState } from 'react';
+import Card from '../../components/Card';
 
 // Firebase, Routes.
 import { collection, getFirestore, onSnapshot, query } from 'firebase/firestore';
@@ -29,8 +27,6 @@ function Products() {
 
   return (
     <div>
-      <Header />
-
       <Grid
         container
         padding={2}
@@ -47,8 +43,6 @@ function Products() {
           )
         }
       </Grid>
-
-      <Footer></Footer>
     </div>
   );
 }

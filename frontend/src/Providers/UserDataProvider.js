@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-export const UserDataContext = React.createContext({});
+import React, { createContext, useContext, useEffect, useState } from 'react';
+export const UserDataContext = createContext({});
 
 export const UserDataProvider = (props) => {
   const [data, setData] = useState({
@@ -33,4 +33,4 @@ export const UserDataProvider = (props) => {
   );
 };
 
-export const useData = () => React.useContext(UserDataContext); 
+export const useData = () => useContext(UserDataContext); 

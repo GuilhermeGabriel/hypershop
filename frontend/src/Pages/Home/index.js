@@ -1,9 +1,7 @@
 // UI
-import Header from '../../components/Header';
+import Grid from '@mui/material/Grid';
 import Banner from '../../components/Banner';
 import Card from '../../components/Card';
-import Footer from '../../components/Footer';
-import Grid from '@mui/material/Grid';
 
 // Firebase, Routes.
 import { Link } from 'react-router-dom';
@@ -11,7 +9,6 @@ import { Link } from 'react-router-dom';
 function Home() {
   return (
     <div>
-      <Header />
       <Banner />
 
       <h3
@@ -67,7 +64,6 @@ function Home() {
 
       </Grid>
 
-      <Footer absolut></Footer>
     </div>
   );
 }

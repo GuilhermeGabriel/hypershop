@@ -1,19 +1,18 @@
 // UI
 import * as React from 'react';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
+
+import InfoIcon from '@mui/icons-material/Info';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import InfoIcon from '@mui/icons-material/Info';
 
 // Firebase, Routes
+import { Alert, Snackbar } from '@mui/material';
+import { doc, getDoc, getFirestore } from "firebase/firestore";
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useData } from '../../Providers/UserDataProvider';
-import { doc, getDoc, getFirestore } from "firebase/firestore";
-import { Alert, Snackbar } from '@mui/material';
-import { useState } from 'react';
 
 function Cart() {
   const { data, setData } = useData();
@@ -71,8 +70,6 @@ function Cart() {
 
   return (
     <div>
-      <Header />
-
       <Snackbar
         sx={{ marginRight: 8 }}
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -189,9 +186,7 @@ function Cart() {
             </Box>
           </>
       }
-      
-      <Footer/>
-    </div>
+     </div>
   );
 }
 

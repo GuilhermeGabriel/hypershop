@@ -6,11 +6,9 @@ import VisaSvg from '../../assets/visa-svgrepo-com.svg';
 import { ReactSVG } from 'react-svg'
 import Grid from '@mui/material/Grid';
 
-function Footer({ absolut }) {
+function Footer() {
   return (
     <Grid
-      position={(absolut) ? 'absolut' : 'relative'}
-      bottom={(absolut) ? '0' : -300}
       sx={{
         backgroundColor: '#F6F6F6',
         borderTop: '1px solid #ddd'

@@ -1,15 +1,13 @@
 // UI
-import * as React from 'react';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
+import { Alert } from '@mui/material';
+import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
+import Snackbar from '@mui/material/Snackbar';
+import TextField from '@mui/material/TextField';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Snackbar from '@mui/material/Snackbar';
-import { Alert } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import * as React from 'react';
 
 // Firebase, Routes.
 import { doc, getFirestore, onSnapshot } from "firebase/firestore";
@@ -80,7 +78,6 @@ function Product() {
 
   return (
     <div>
-      <Header />
 
       <Snackbar
         sx={{ marginRight: 8 }}
@@ -188,7 +185,6 @@ function Product() {
         </Grid>
       </Grid>
       
-      <Footer></Footer>
     </div>
   );
 }

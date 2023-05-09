@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 function Banner() {
   return (
     <div id='banner_container'>
-      <h1>igluShop</h1>
+      <h1>HyperShop</h1>
       <h2>Equipamentos desenvolvidos para dar um boost na sua performance.</h2>
       <Link style={{ textDecoration: 'none' }} to='/produtos'>
       <Button variant='outlined' color='secondary'

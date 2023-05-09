@@ -1,11 +1,11 @@
 // UI
-import { useEffect, useState } from 'react';
+import { CardActionArea } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
 import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
+import { useEffect, useState } from 'react';
 
 // Firebase, Routes
 import { doc, getFirestore, onSnapshot } from "firebase/firestore";
@@ -32,7 +32,7 @@ export default function MultiActionAreaCard({ id }) {
           <CardMedia
             sx={{ objectFit: "contain", marginTop: 6, marginBottom: 6 }}
             component="img"
-            height="300vh"
+            height="150vh"
             image={data.image}
           />
 

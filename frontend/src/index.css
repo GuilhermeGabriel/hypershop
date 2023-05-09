@@ -2,3 +2,11 @@
   margin: 0;
   font-family: Roboto, Helvetica, Helvetica Neue, Arial, Lucida Grande, sans-serif;
 }
+
+html, body {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
