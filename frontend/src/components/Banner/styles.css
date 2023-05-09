@@ -3,9 +3,11 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 75vh;
-  background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url("../../assets/banner.jpg");
+  height: 50vh;
+  background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("../../assets/snowboardbg.gif");
   background-size: cover;
+  background-position: 0% 50%;
+  animation: anim-ss steps(23) 1s 5s infinite reverse;
 }
 
 #banner_container > h1 {
