@@ -2,31 +2,39 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver } from '@nestjs/apollo';
 
-import { StudentModule } from './student/student.module';
+import { UserModule } from './users/user.module';
 import { LessonModule } from './lesson/lesson.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { Lesson } from './lesson/lesson.entity';
-import { Student } from './student/student.entity';
+import { User } from './users/user.entity';
+import { Product } from './product/product.entity';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'mongodb',
-      url: 'mongodb://localhost/school',
+      url: 'mongodb://localhost/hyperstore',
       synchronize: true,
       useUnifiedTopology: true,
       entities: [
         Lesson,
-        Student
+        User,
+        Product
       ],
     }),
     GraphQLModule.forRoot({
       driver: ApolloDriver,
-      autoSchemaFile: true
+      autoSchemaFile: true,
+      cors: {
+        origin: 'http://localhost:3000',
+        credentials: true,
+      },
     }),
     LessonModule,
-    StudentModule
+    UserModule,
+    ProductModule,
   ],
   controllers: [],
   providers: [],

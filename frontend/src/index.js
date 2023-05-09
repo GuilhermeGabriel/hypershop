@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter } from 'react-router-dom';
-import ScrollToTop from "./services/ScrollToTop";
+import App from './App';
+
 import { UserDataProvider } from './Providers/UserDataProvider';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+import './index.css';
+import ScrollToTop from "./services/ScrollToTop";
 import './services/firebase';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+
+const client = new ApolloClient({
+  uri: "http://localhost:3001/graphql",
+  cache: new InMemoryCache(),
+});
 
 const innerTheme = createTheme({
   palette: {
@@ -29,12 +37,14 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={innerTheme}>
-      <UserDataProvider>
-        <BrowserRouter>
-          <ScrollToTop />
-          <App />
-        </BrowserRouter>
-      </UserDataProvider>
+      <ApolloProvider client={client}>
+        <UserDataProvider>
+          <BrowserRouter>
+            <ScrollToTop />
+            <App />
+          </BrowserRouter>
+        </UserDataProvider>
+      </ApolloProvider>
     </ThemeProvider>
   </React.StrictMode>
 );

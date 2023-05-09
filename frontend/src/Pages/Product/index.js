@@ -9,10 +9,10 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
 
-// Firebase, Routes.
-import { doc, getFirestore, onSnapshot } from "firebase/firestore";
+// Query, Routes
 import { useParams } from 'react-router-dom';
 import { useData } from '../../Providers/UserDataProvider';
+import { useQuery, gql } from "@apollo/client";
 
 function Product() {
   const [openToast, setOpenToast] = React.useState(false);
@@ -25,18 +25,21 @@ function Product() {
   const { id } = useParams();
   const { data, setData } = useData();
 
-  const [item, setItem] = React.useState({});
+  const QUERY = gql`
+  query($id: String!){
+    product(id: $id) {
+      id
+      description
+      title
+      imgUrl
+      category
+      price
+      quantity
+    } 
+  }`;
 
-  React.useEffect(() => {
-    const db = getFirestore();
-    async function getProdutos() {
-      onSnapshot(doc(db, "produtos", id), (doc) => {
-        setItem(doc.data());
-      });
-    }
+  const { data: apiData, loading, error } = useQuery(QUERY, { variables: { id } });
 
-    getProdutos();
-  }, [id]);
 
   const handleCloseToast = (event, reason) => {
     if (reason === 'clickaway') {
@@ -59,7 +62,7 @@ function Product() {
   }, [data]);
 
   const showToastInfo = () => {
-    if (item.quantidade < quantidade) {
+    if (apiData?.product.quantity < quantidade) {
       setAlertType('error');
       setAlertInfo('Não há itens suficientes!');
     } else {
@@ -71,7 +74,7 @@ function Product() {
       });
 
       setAlertType('success');
-      setAlertInfo(quantidade + ' ' + item.name + ' adicionado ao carrinho!');
+      setAlertInfo(quantidade + ' ' + apiData?.product.title + ' adicionado ao carrinho!');
     }
     setOpenToast(true)
   };
@@ -107,16 +110,16 @@ function Product() {
       >
         <Grid item xs={12} sm={6}>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <img alt='imagem do produto' style={{ maxWidth: '30vw', flex: 1, paddingRight: 16, objectFit: 'cover' }} src={item.image}></img>
+            <img alt='imagem do produto' style={{ maxWidth: '30vw', flex: 1, paddingRight: 16, objectFit: 'cover' }} src={apiData?.product.imgUrl}></img>
           </div>
         </Grid>
 
         <Grid item xs={12} sm={6}>
           <Typography variant="h4" fontWeight={'bold'} component="div">
-            {item.name}
+            {apiData?.product.title}
           </Typography>
           <Typography variant="h6" fontWeight={'bold'} component="div">
-            R$ {item.preco},00
+            R$ {apiData?.product.price},00
           </Typography>
           <Typography variant="h6" fontWeight={'500'} color='#7a7a7a' fontSize={14} component="div">
             Code: {id}
@@ -160,7 +163,7 @@ function Product() {
           <br></br>
           <br></br>
           <Typography variant="h5" fontWeight={'400'} color='#7a7a7a' fontSize={12} component="div">
-            QUANTIDADE DISPONÍVEL: {item.quantidade}
+            QUANTIDADE DISPONÍVEL: {apiData?.product.quantity}
           </Typography>
 
           <TextField
@@ -184,7 +187,7 @@ function Product() {
           </Typography>
         </Grid>
       </Grid>
-      
+
     </div>
   );
 }

@@ -3,28 +3,25 @@ import Grid from '@mui/material/Grid';
 import { useEffect, useState } from 'react';
 import Card from '../../components/Card';
 
-// Firebase, Routes.
-import { collection, getFirestore, onSnapshot, query } from 'firebase/firestore';
+// Query, Routes.
 import { Link } from 'react-router-dom';
+import { useQuery, gql } from "@apollo/client";
+
+const QUERY = gql`{
+  products {
+    id
+    description
+    title
+    imgUrl
+    category
+    price
+    quantity
+  } 
+}`;
 
 function Products() {
-  const [produtos, setProdutos] = useState([]);
-  useEffect(() => {
-    const db = getFirestore();
-
-    async function getProdutosData() {
-      const q = query(
-        collection(db, 'produtos')
-      );
-
-      onSnapshot(q, querySnapshot => {
-        setProdutos(querySnapshot.docs.map(doc => doc.data()));
-      });
-    }
-
-    getProdutosData();
-  });
-
+  const { data, loading, error } = useQuery(QUERY);
+  console.log(data);
   return (
     <div>
       <Grid
@@ -34,10 +31,10 @@ function Products() {
       >
 
         {
-          produtos.map(item =>
-            <Grid key={item.id} item xs={12} sm={6} lg={3}>
-              <Link key={item.id} style={{ textDecoration: 'none' }} to={`/produto/${item.id}`}>
-                <Card id={item.id}></Card>
+          data && data.products.map(item =>
+            <Grid key={item?.id} item xs={12} sm={6} lg={3}>
+              <Link key={item?.id} style={{ textDecoration: 'none' }} to={`/produto/${item?.id}`}>
+                <Card id={item?.id}></Card>
               </Link>
             </Grid>
           )

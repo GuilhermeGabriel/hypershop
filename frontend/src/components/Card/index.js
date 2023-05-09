@@ -7,22 +7,24 @@ import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import { useEffect, useState } from 'react';
 
-// Firebase, Routes
-import { doc, getFirestore, onSnapshot } from "firebase/firestore";
+// Query, Routes
+import { useQuery, gql } from "@apollo/client";
 
 export default function MultiActionAreaCard({ id }) {
-  const [data, setData] = useState({});
+  const QUERY = gql`
+  query($id: String!){
+    product(id: $id) {
+      id
+      description
+      title
+      imgUrl
+      category
+      price
+      quantity
+    } 
+  }`;
 
-  useEffect(() => {
-    const db = getFirestore();
-    function getProdutos() {
-      onSnapshot(doc(db, "produtos", id), (doc) => {
-        setData(doc.data());
-      });
-    }
-
-    getProdutos();
-  });
+  const { data, loading, error } = useQuery(QUERY, { variables: { id } });
 
   return (
     <>
@@ -33,21 +35,21 @@ export default function MultiActionAreaCard({ id }) {
             sx={{ objectFit: "contain", marginTop: 6, marginBottom: 6 }}
             component="img"
             height="150vh"
-            image={data.image}
+            image={data?.product.imgUrl}
           />
 
           <Divider variant="middle" />
           <CardContent>
             <Typography gutterBottom variant="h6" component="div">
-              {data.name}
+              {data?.product.title}
             </Typography>
 
             <Typography sx={{ fontWeight: '700' }} color="text.primary">
-              R$ {data.preco},00
+              R$ {data?.product.price},00
             </Typography>
 
             <Typography sx={{ fontSize: 12, color: '#737373' }} variant="h6" color="text.primary">
-              {data.categoria}
+              {data?.product.category}
             </Typography>
           </CardContent>
 

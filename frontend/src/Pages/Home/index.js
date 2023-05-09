@@ -1,12 +1,28 @@
 // UI
+import { useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Banner from '../../components/Banner';
 import Card from '../../components/Card';
 
-// Firebase, Routes.
+// Queries and Routes
 import { Link } from 'react-router-dom';
+import { useQuery, gql } from "@apollo/client";
+
+const QUERY = gql`{
+  products {
+    id
+    description
+    title
+    imgUrl
+    category
+    price
+    quantity
+  } 
+}`;
 
 function Home() {
+  const { data, loading, error } = useQuery(QUERY);
+
   return (
     <div>
       <Banner />
@@ -38,30 +54,19 @@ function Home() {
         spacing={2}
         paddingBottom={6}
       >
-        <Grid item xs={12} sm={6} md={3}>
-          <Link style={{ textDecoration: 'none' }} to='/produto/CwgRbFvMNqiXmZew9ia2'>
-            <Card id='CwgRbFvMNqiXmZew9ia2'></Card>
-          </Link>
-        </Grid>
 
-        <Grid item xs={12} sm={6} md={3}>
-          <Link style={{ textDecoration: 'none' }} to='/produto/jXLXuXsluctRAZS3jBRJ'>
-            <Card id='jXLXuXsluctRAZS3jBRJ'></Card>
-          </Link>
-        </Grid>
-
-        <Grid item xs={12} sm={6} md={3}>
-          <Link style={{ textDecoration: 'none' }} to='/produto/qsO7hQ7ZmWXpsr3X1WBP'>
-            <Card id='qsO7hQ7ZmWXpsr3X1WBP'></Card>
-          </Link>
-        </Grid>
-
-        <Grid item xs={12} sm={6} md={3}>
-          <Link style={{ textDecoration: 'none' }} to='/produto/wQlZxPu32jfHgfb56dyX'>
-            <Card id='wQlZxPu32jfHgfb56dyX'></Card>
-          </Link>
-        </Grid>
-
+        {
+          data && data.products.slice(0, 4).map((product) => (
+            <Grid item xs={12} sm={6} md={3} key={product.id}>
+              <Link style={{ textDecoration: 'none' }} to={`/produto/${product.id}`}>
+                <Card
+                  id={product.id}
+                />
+              </Link>
+            </Grid>
+          ))
+        }
+        
       </Grid>
 
     </div>

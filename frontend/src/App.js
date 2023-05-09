@@ -1,20 +1,22 @@
-import { Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
-import Home from "./Pages/Home";
-import Products from './Pages/Products';
-import Product from './Pages/Product';
+import { Stack } from "@mui/material";
 import Cart from './Pages/Cart';
 import Checkout from "./Pages/Checkout";
-import { Stack } from "@mui/material";
-import Header from "./components/Header";
+import Home from "./Pages/Home";
+import Product from './Pages/Product';
+import Products from './Pages/Products';
 import Footer from "./components/Footer";
+import Header from "./components/Header";
 
 function App() {
   return (
     <Stack sx={{ height: "100%" }}>
+    
       <Stack>
         <Header />
       </Stack>
+    
       <Stack sx={{ flexGrow: 1 }}>
         <Routes>
           <Route exact path='/' element={<Home />} />
@@ -24,6 +26,7 @@ function App() {
           <Route exact path='/checkout' element={<Checkout />} />
         </Routes>
       </Stack>
+      
       <Stack>
         <Footer />
       </Stack>
