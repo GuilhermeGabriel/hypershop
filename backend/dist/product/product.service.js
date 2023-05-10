@@ -30,6 +30,15 @@ let ProductService = class ProductService {
     async getProducts() {
         return this.productRepository.find();
     }
+    async getProductsByIds(ids) {
+        return this.productRepository.find({
+            where: {
+                id: {
+                    $in: ids
+                }
+            }
+        });
+    }
     async createProduct(createProductInput) {
         const { title, description, imgUrl, price, quantity, category } = createProductInput;
         const product = this.productRepository.create({

@@ -8,11 +8,12 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import './index.css';
 import ScrollToTop from "./services/ScrollToTop";
-import './services/firebase';
+// import './services/firebase';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
 const client = new ApolloClient({
   uri: "https://54.94.110.220:3001/graphql",
+  // uri: "https://localhost:3001/graphql",
   cache: new InMemoryCache(),
 });
 

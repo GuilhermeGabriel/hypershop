@@ -21,6 +21,18 @@ export class ProductService {
     return this.productRepository.find();
   }
 
+  async getProductsByIds(ids: string[]): Promise<Product[]> {
+    return this.productRepository.find(
+      {
+        where: {
+          id: {
+            $in: ids
+          } as any
+        }
+      }
+    );
+  }
+
   async createProduct(createProductInput: CreateProductInput): Promise<Product> {
     const { title, description, imgUrl, price, quantity, category } = createProductInput;
 
@@ -36,4 +48,6 @@ export class ProductService {
 
     return this.productRepository.save(product);
   }
+
+  
 }

@@ -6,5 +6,6 @@ export declare class ProductService {
     constructor(productRepository: Repository<Product>);
     getProduct(id: string): Promise<Product>;
     getProducts(): Promise<Product[]>;
+    getProductsByIds(ids: string[]): Promise<Product[]>;
     createProduct(createProductInput: CreateProductInput): Promise<Product>;
 }

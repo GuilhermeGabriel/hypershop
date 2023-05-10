@@ -2,7 +2,6 @@ import { Resolver, Mutation, Args, Query } from '@nestjs/graphql';
 import { ProductType } from './product.type';
 import { CreateProductInput } from './create-product.input';
 import { ProductService } from './product.service';
-
 @Resolver(of => ProductType)
 export class ProductResolver {
   constructor(
@@ -21,7 +20,14 @@ export class ProductResolver {
     return this.productService.getProducts();
   }
 
-  @Mutation(returns => ProductType)
+  @Query(returns => [ProductType])
+  async productsByIds(
+    @Args('ids', { type: () => [String] }) ids: string[],
+  ) {
+    return this.productService.getProductsByIds(ids);
+  }
+
+  @Mutation(returns => [ProductType])
   async createProduct(
     @Args('createUserInput') createProductInput: CreateProductInput
   ) {

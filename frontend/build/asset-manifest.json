@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.d9102237.css",
+    "main.css": "/static/css/main.607003e1.css",
     "main.js": "/static/js/main.ea22beaf.js",
     "static/media/snowboardbg.gif": "/static/media/snowboardbg.ba01843fab40945eb46e.gif",
     "static/media/paypal-svgrepo-com.svg": "/static/media/paypal-svgrepo-com.d802ffd6a99981c0d2ef5134a22b993a.svg",
@@ -8,11 +8,11 @@
     "static/media/visa-svgrepo-com.svg": "/static/media/visa-svgrepo-com.e7e819702378b7d940658e4355e3c9b6.svg",
     "index.html": "/index.html",
     "static/media/mastercard-svgrepo-com.svg": "/static/media/mastercard-svgrepo-com.894ce7c3fb25997080f94343b86df7af.svg",
-    "main.d9102237.css.map": "/static/css/main.d9102237.css.map",
+    "main.607003e1.css.map": "/static/css/main.607003e1.css.map",
     "main.ea22beaf.js.map": "/static/js/main.ea22beaf.js.map"
   },
   "entrypoints": [
-    "static/css/main.d9102237.css",
+    "static/css/main.607003e1.css",
     "static/js/main.ea22beaf.js"
   ]
 }

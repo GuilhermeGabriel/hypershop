@@ -4,46 +4,42 @@ import React from "react";
 import CheckoutSucess from '../../components/CheckoutSucess';
 import InputCheckout from '../../components/InputCheckout';
 
-// Firebase, Routes.
-import { doc, getDoc, getFirestore } from "firebase/firestore";
-import { useState } from "react";
+// Query, Routes.
+import { useState, useEffect } from "react";
+import { gql, useQuery } from '@apollo/client';
 import { useData } from '../../Providers/UserDataProvider';
 
 function Checkout() {
   const { data } = useData();
-  const [produtos, setProdutos] = React.useState([]);
-  const [precoTotal, setPrecoTotal] = React.useState(0);
-  const [finalizado, setFinalizado] = React.useState(false);
+  const [produtos, setProdutos] = useState([]);
+  const [precoTotal, setPrecoTotal] = useState(0);
+  const [finalizado, setFinalizado] = useState(false);
 
-  React.useEffect(() => {
-    const db = getFirestore();
-
-    let keys = Object.keys(data.produtos);
-    let results = [];
-    for (let k of keys) {
-      const id = k;
-      const r = getDoc(doc(db, "produtos", id));
-      results.push(r);
+  let idsProdutos = JSON.parse(localStorage.getItem('data')).produtos;
+  idsProdutos = Object.keys(idsProdutos);
+  const listaIds = idsProdutos.map(id => `"${id}"`).join(', ');
+  const QUERY = gql`
+    query {
+      productsByIds(ids: [${listaIds}]) {
+        id
+        title,
+        price,
+        imgUrl,
+        quantity
+      }
     }
-
-    async function getProds() {
-      const resultfinal = await Promise.all(results);
-      const prods = [];
-      let total = 0;
-      resultfinal.forEach((doc) => {
-        prods.push(doc.data());
-        total += doc.data().preco * data.produtos[doc.data().id];
-      });
-      setProdutos([...prods]);
-      setPrecoTotal(total);
+  `;
+  const { data: dataGraphql, loading, error } = useQuery(QUERY);
+  useEffect(() => {
+    if (dataGraphql) {
+      let precoTotal = 0;
+      for (let item of dataGraphql.productsByIds) {
+        precoTotal += item.price * data.produtos[item.id];
+      }
+      setPrecoTotal(precoTotal);
     }
+  }, [dataGraphql]);
 
-    getProds();
-  }, [data]);
-
-  useState(() => {
-    console.log(data);
-  }, [data])
 
   return (
     <Box>
@@ -81,7 +77,7 @@ function Checkout() {
             </tr>
 
             {
-              produtos.map(item =>
+              dataGraphql.productsByIds.map(item =>
                 <>
                   <tr style={{ borderBottom: '1pt solid #e1e3e5', borderTop: '1pt solid #e1e3e5' }}>
                     <td style={{ paddingTop: 16, paddingBottom: 8 }}>
@@ -89,7 +85,7 @@ function Checkout() {
                         <Box
                           component="img"
                           width={{ xs: 64, md: 120 }}
-                          src={item.image}
+                          src={item.imgUrl}
                         />
                         <ul style={{ marginTop: 32, listStyle: 'none', textAlign: 'start', marginLeft: -24 }}>
                           <li><b>{item.name}</b></li>
@@ -100,11 +96,11 @@ function Checkout() {
                     </td>
 
                     <td style={{ textAlign: 'end', fontSize: 12 }}>
-                      <Typography fontSize={{ xs: 12, md: 16 }}><b>{data.produtos[item.id]}x</b> R${item.preco},00</Typography>
+                      <Typography fontSize={{ xs: 12, md: 16 }}><b>{data.produtos[item.id]}x</b> R${item.price},00</Typography>
                     </td>
 
                     <td style={{ textAlign: 'end', fontSize: 12 }}>
-                      <Typography fontSize={{ xs: 12, md: 16 }}>R${item.preco * data.produtos[item.id]},00</Typography>
+                      <Typography fontSize={{ xs: 12, md: 16 }}>R${item.price * data.produtos[item.id]},00</Typography>
                     </td>
                   </tr>
                 </>

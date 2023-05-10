@@ -5,5 +5,6 @@ export declare class ProductResolver {
     constructor(productService: ProductService);
     product(id: string): Promise<import("./product.entity").Product>;
     products(): Promise<import("./product.entity").Product[]>;
+    productsByIds(ids: string[]): Promise<import("./product.entity").Product[]>;
     createProduct(createProductInput: CreateProductInput): Promise<import("./product.entity").Product>;
 }

@@ -6,7 +6,7 @@
   height: 70vh;
   background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("../../assets/snowboardbg.gif");
   background-size: cover;
-  background-position: 0% 50%;
+  background-position: 50% 50%;
   animation: anim-ss steps(23) 1s 5s infinite reverse;
 }
 

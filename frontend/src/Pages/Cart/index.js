@@ -1,5 +1,5 @@
 // UI
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import InfoIcon from '@mui/icons-material/Info';
 import Box from '@mui/material/Box';
@@ -9,9 +9,9 @@ import Typography from '@mui/material/Typography';
 
 // Firebase, Routes
 import { Alert, Snackbar } from '@mui/material';
-import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { Link, useNavigate } from 'react-router-dom';
 import { useData } from '../../Providers/UserDataProvider';
+import { gql, useQuery } from '@apollo/client';
 
 function Cart() {
   const { data, setData } = useData();
@@ -19,31 +19,34 @@ function Cart() {
   const [precoTotal, setPrecoTotal] = useState(0);
   const [openToast, setOpenToast] = useState(false);
 
+  let idsProdutos = JSON.parse(localStorage.getItem('data')).produtos;
+  idsProdutos = Object.keys(idsProdutos);
+  const listaIds = idsProdutos.map(id => `"${id}"`).join(', ');
+  const QUERY = gql`
+    query {
+      productsByIds(ids: [${listaIds}]) {
+        id
+        title,
+        price,
+        imgUrl,
+        quantity
+      }
+    }
+  `;
+
+const { data: dataGraphql, loading, error } = useQuery(QUERY);
+
   useEffect(() => {
-    const db = getFirestore();
-
-    let keys = Object.keys(data.produtos);
-    let results = [];
-    for (let k of keys) {
-      const id = k;
-      const r = getDoc(doc(db, "produtos", id));
-      results.push(r);
+    if (dataGraphql) {
+      let precoTotal = 0;
+      for (let item of dataGraphql.productsByIds) {
+        precoTotal += item.price * data.produtos[item.id];
+      }
+      setPrecoTotal(precoTotal);
     }
+  }, [dataGraphql]);
 
-    async function getProds() {
-      const resultfinal = await Promise.all(results);
-      const prods = [];
-      let total = 0;
-      resultfinal.forEach((doc) => {
-        prods.push(doc.data());
-        total += doc.data().preco * data.produtos[doc.data().id];
-      });
-      setProdutos([...prods]);
-      setPrecoTotal(total);
-    }
 
-    getProds();
-  }, [data]);
 
   const removeProduct = (e, idproduto) => {
     delete data.produtos[idproduto];
@@ -53,13 +56,15 @@ function Cart() {
 
   let navigate = useNavigate();
   const clickBuy = () => {
+    
     let canBuy = true;
-    for (let item of produtos) {
-      if (item.quantidade < data.produtos[item.id]) {
+    for (let item of dataGraphql.productsByIds) {
+      if (data.produtos[item.id] > item.quantidade) {
         canBuy = false;
         break;
       }
     }
+
     if (canBuy) {
       navigate('/checkout');
     } else {
@@ -119,7 +124,7 @@ function Cart() {
                     </thead>
 
                     {
-                      produtos.map(item =>
+                      dataGraphql?.productsByIds.map(item =>
                         <tbody key={item.id}>
                           <tr style={{ borderBottom: '1pt solid #e1e3e5', borderTop: '1pt solid #e1e3e5' }}>
                             <td style={{ paddingTop: 16, paddingBottom: 8 }}>
@@ -127,10 +132,10 @@ function Cart() {
                                 <Box
                                   component="img"
                                   width={{ xs: 64, md: 120 }}
-                                  src={item.image}
+                                  src={item.imgUrl}
                                 />
                                 <ul style={{ listStyle: 'none', textAlign: 'start', marginLeft: -24 }}>
-                                  <li><b>{item.name}</b></li>
+                                  <li><b>{item.title}</b></li>
                                   <li>Size: X</li>
                                   <li>Color: Blue</li>
                                   <li>
@@ -142,7 +147,7 @@ function Cart() {
                             </td>
 
                             <td style={{ textAlign: 'end', fontSize: 12 }}>
-                              <Typography fontSize={{ xs: 12, md: 16 }}><b>{data.produtos[item.id]}x</b> R${item.preco},00</Typography>
+                              <Typography fontSize={{ xs: 12, md: 16 }}><b>{data.produtos[item.id]}x</b> R${item.price},00</Typography>
                               {
                                 (data.produtos[item.id] > item.quantidade) &&
                                 <Typography display='flex' justifyContent={'end'} alignItems='center' color='red' fontSize={{ xs: 10, md: 16 }}>
@@ -152,7 +157,7 @@ function Cart() {
                             </td>
 
                             <td style={{ textAlign: 'end', fontSize: 12 }}>
-                              <Typography fontSize={{ xs: 12, md: 16 }}>R${item.preco * data.produtos[item.id]},00</Typography>
+                              <Typography fontSize={{ xs: 12, md: 16 }}>R${item.price * data.produtos[item.id]},00</Typography>
                             </td>
                           </tr>
                         </tbody>
