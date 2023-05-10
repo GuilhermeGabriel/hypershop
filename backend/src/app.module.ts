@@ -31,7 +31,7 @@ import { ProductModule } from './product/product.module';
         origin: true,
         credentials: true,
       },
-      playground: true
+      playground: false
     }),
     LessonModule,
     UserModule,
