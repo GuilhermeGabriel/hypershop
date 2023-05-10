@@ -12,7 +12,7 @@ import './services/firebase';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
 const client = new ApolloClient({
-  uri: "http://192.168.1.5:3001/graphql",
+  uri: "http://54.94.110.220:3001/graphql",
   cache: new InMemoryCache(),
 });
 

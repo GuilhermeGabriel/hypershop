@@ -15,7 +15,7 @@ import { ProductModule } from './product/product.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mongodb',
-      url: 'mongodb://localhost/hyperstore',
+      url: 'mongodb://localhost/school',
       synchronize: true,
       useUnifiedTopology: true,
       entities: [
@@ -31,6 +31,7 @@ import { ProductModule } from './product/product.module';
         origin: true,
         credentials: true,
       },
+      playground: false
     }),
     LessonModule,
     UserModule,

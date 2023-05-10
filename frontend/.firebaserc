@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "hyper-sttore"
+  },
+  "targets": {
+    "hyper-sttore": {
+      "hosting": {
+        "siteprincial": [
+          "hyper-shop"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
