@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 50vh;
+  height: 70vh;
   background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("../../assets/snowboardbg.gif");
   background-size: cover;
   background-position: 0% 50%;

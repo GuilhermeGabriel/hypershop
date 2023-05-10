@@ -1,5 +1,5 @@
 // UI
-import * as React from 'react';
+import { useEffect,useState } from 'react';
 
 import InfoIcon from '@mui/icons-material/Info';
 import Box from '@mui/material/Box';
@@ -10,17 +10,16 @@ import Typography from '@mui/material/Typography';
 // Firebase, Routes
 import { Alert, Snackbar } from '@mui/material';
 import { doc, getDoc, getFirestore } from "firebase/firestore";
-import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useData } from '../../Providers/UserDataProvider';
 
 function Cart() {
   const { data, setData } = useData();
-  const [produtos, setProdutos] = React.useState([]);
-  const [precoTotal, setPrecoTotal] = React.useState(0);
+  const [produtos, setProdutos] = useState([]);
+  const [precoTotal, setPrecoTotal] = useState(0);
   const [openToast, setOpenToast] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const db = getFirestore();
 
     let keys = Object.keys(data.produtos);
@@ -49,7 +48,7 @@ function Cart() {
   const removeProduct = (e, idproduto) => {
     delete data.produtos[idproduto];
     localStorage.setItem('data', JSON.stringify(data));
-    setData({...data, data});
+    setData({ ...data, data });
   }
 
   let navigate = useNavigate();
@@ -186,7 +185,7 @@ function Cart() {
             </Box>
           </>
       }
-     </div>
+    </div>
   );
 }
 

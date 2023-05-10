@@ -28,7 +28,7 @@ import { ProductModule } from './product/product.module';
       driver: ApolloDriver,
       autoSchemaFile: true,
       cors: {
-        origin: 'http://localhost:3000',
+        origin: true,
         credentials: true,
       },
     }),
