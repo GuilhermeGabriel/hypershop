@@ -24,7 +24,7 @@ AppModule = __decorate([
         imports: [
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'mongodb',
-                url: 'mongodb://localhost/school',
+                url: 'mongodb://localhost/hyperstore',
                 synchronize: true,
                 useUnifiedTopology: true,
                 entities: [
@@ -40,7 +40,7 @@ AppModule = __decorate([
                     origin: true,
                     credentials: true,
                 },
-                playground: false
+                playground: true
             }),
             lesson_module_1.LessonModule,
             user_module_1.UserModule,
