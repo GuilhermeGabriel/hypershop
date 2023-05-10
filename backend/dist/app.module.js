@@ -40,7 +40,7 @@ AppModule = __decorate([
                     origin: true,
                     credentials: true,
                 },
-                playground: true
+                playground: false
             }),
             lesson_module_1.LessonModule,
             user_module_1.UserModule,
