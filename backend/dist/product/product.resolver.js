@@ -55,8 +55,8 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ProductResolver.prototype, "productsByIds", null);
 __decorate([
-    (0, graphql_1.Mutation)(returns => [product_type_1.ProductType]),
-    __param(0, (0, graphql_1.Args)('createUserInput')),
+    (0, graphql_1.Mutation)(returns => product_type_1.ProductType),
+    __param(0, (0, graphql_1.Args)('createProductInput')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_product_input_1.CreateProductInput]),
     __metadata("design:returntype", Promise)

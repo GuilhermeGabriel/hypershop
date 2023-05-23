@@ -27,9 +27,9 @@ export class ProductResolver {
     return this.productService.getProductsByIds(ids);
   }
 
-  @Mutation(returns => [ProductType])
+  @Mutation(returns => ProductType)
   async createProduct(
-    @Args('createUserInput') createProductInput: CreateProductInput
+    @Args('createProductInput') createProductInput: CreateProductInput
   ) {
     return this.productService.createProduct(createProductInput);
   }
